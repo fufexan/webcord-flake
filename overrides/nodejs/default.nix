@@ -7,7 +7,7 @@
 }: {
   webcord.runBuild = let
     desktopItem = pkgs.makeDesktopItem {
-      name = "WebCord";
+      name = "webcord";
       desktopName = "WebCord";
       genericName = "Discord and Fosscord client";
       exec = "webcord";
@@ -15,7 +15,18 @@
       categories = ["Network" "InstantMessaging"];
       mimeTypes = ["x-scheme-handler/discord"];
     };
+
+    buildInfo = pkgs.writeTextFile {
+      name = "buildInfo.json";
+      text = builtins.toJSON {
+        type = "release";
+        features.updateNotifications = false;
+      };
+    };
   in {
+    preConfigure = ''
+      cp ${buildInfo} buildInfo.json
+    '';
     postBuild = ''
       mkdir code
       mv app/* code
@@ -37,7 +48,9 @@
     postFixup = ''
       wrapProgram $out/bin/webcord \
         --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland}}" \
-        --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [pkgs.pipewire]}"
+        --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [pkgs.pipewire]}" \
+        --prefix XDG_DATA_DIRS : "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/" \
+        --prefix PATH : "${pkgs.xdg-utils}/bin"
     '';
   };
 }
