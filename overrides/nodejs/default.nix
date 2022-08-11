@@ -15,6 +15,7 @@
 
     postFixup = ''
       wrapProgram $out/bin/webcord \
+        --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland}}" \
         --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [pkgs.pipewire]}"
     '';
   };
