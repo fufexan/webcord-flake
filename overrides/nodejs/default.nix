@@ -100,7 +100,13 @@
       ln -s "${desktopItem}/share/applications" $out/share/
     '';
 
+    # use electron from nixpkgs (doesn't have LD issues)
     postFixup = ''
+      cat << EOF > $out/bin/webcord
+      #! ${pkgs.bash}/bin/bash -e
+      exec "${pkgs.electron}/bin/electron" $out/lib/node_modules/webcord "\$@"
+      EOF
+
       wrapProgram $out/bin/webcord \
         --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland}}" \
         --prefix XDG_DATA_DIRS : "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/" \
