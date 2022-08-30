@@ -2,9 +2,9 @@
   description = "WebCord Nix Flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     dream2nix = {
-      url = "github:nix-community/dream2nix";
+      url = "github:fufexan/dream2nix/electron";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     webcord = {

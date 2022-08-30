@@ -84,6 +84,7 @@
       mv app/* code
       mv code app
       cp -r sources/translations app
+      rm -rf .husky
     '';
 
     postInstall = ''
