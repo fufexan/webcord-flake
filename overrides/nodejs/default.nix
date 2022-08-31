@@ -110,7 +110,8 @@
       wrapProgram $out/bin/webcord \
         --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland}}" \
         --prefix XDG_DATA_DIRS : "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/" \
-        --prefix PATH : "${pkgs.xdg-utils}/bin"
+        --prefix PATH : "${lib.makeBinPath [pkgs.xdg-utils]}" \
+        --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [pkgs.pipewire]}"
     '';
   };
 }
