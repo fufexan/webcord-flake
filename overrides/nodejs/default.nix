@@ -31,51 +31,53 @@
       nodejs
       python3
     ];
-    
-    buildInputs = with pkgs; [
-      alsa-lib
-      atk
-      at-spi2-atk
-      at-spi2-core
-      cairo
-      cups
-      dbus
-      expat
-      fontconfig
-      freetype
-      gdk-pixbuf
-      glib
-      gtk3
-      libappindicator-gtk3
-      libcxx
-      libdbusmenu
-      libdrm
-      libnotify
-      libpulseaudio
-      libuuid
-      mesa
-      nspr
-      nss
-      pango
-      stdenv.cc.cc
-      systemd
-      # vulkan-extension-layer
-      vulkan-loader
-    ] ++ (with pkgs.xorg; [
-      libX11
-      libxcb
-      libXcomposite
-      libXcursor
-      libXdamage
-      libXext
-      libXfixes
-      libXi
-      libXrandr
-      libXrender
-      libXScrnSaver
-      libXtst
-    ]);
-    
+
+    buildInputs = with pkgs;
+      [
+        alsa-lib
+        atk
+        at-spi2-atk
+        at-spi2-core
+        cairo
+        cups
+        dbus
+        expat
+        fontconfig
+        freetype
+        gdk-pixbuf
+        glib
+        gtk3
+        libappindicator-gtk3
+        libcxx
+        libdbusmenu
+        libdrm
+        libnotify
+        libpulseaudio
+        libuuid
+        mesa
+        nspr
+        nss
+        pango
+        stdenv.cc.cc
+        systemd
+        # vulkan-extension-layer
+        vulkan-loader
+      ]
+      ++ (with pkgs.xorg; [
+        libX11
+        libxcb
+        libXcomposite
+        libXcursor
+        libXdamage
+        libXext
+        libXfixes
+        libXi
+        libXrandr
+        libXrender
+        libXScrnSaver
+        libXtst
+      ]);
+
     preConfigure = ''
       cp ${buildInfo} buildInfo.json
     '';

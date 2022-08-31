@@ -44,5 +44,7 @@
       inherit (dream.${system}.packages) webcord;
       default = webcord;
     });
+
+    formatter = genSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   };
 }
