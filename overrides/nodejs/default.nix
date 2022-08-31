@@ -92,9 +92,9 @@
     postInstall = ''
       mkdir -p $out/share/icons/hicolor
       for res in {24,48,64,128,256}; do
-        mkdir -p $out/share/icons/hicolor/''${res}x''${res}
+        mkdir -p $out/share/icons/hicolor/''${res}x''${res}/apps
         ln -s $out/lib/node_modules/webcord/sources/assets/icons/app.png \
-          $out/share/icons/hicolor/''${res}x''${res}/webcord.png
+          $out/share/icons/hicolor/''${res}x''${res}/apps/webcord.png
       done
 
       ln -s "${desktopItem}/share/applications" $out/share/
