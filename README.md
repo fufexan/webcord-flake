@@ -59,3 +59,13 @@ in {
   ];
 }
 ```
+
+## Cachix
+
+You can use the Cachix cache to download the binary directly instead of building it
+```nix
+nix.settings = {
+  substituters = ["https://webcord.cachix.org"];
+  trusted-public-keys = ["webcord.cachix.org-1:l555jqOZGHd2C9+vS8ccdh8FhqnGe8L78QrHNn+EFEs="];
+}
+```

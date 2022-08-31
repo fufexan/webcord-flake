@@ -47,4 +47,9 @@
 
     formatter = genSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   };
+
+  nixConfig = {
+    extra-substituters = ["https://webcord.cachix.org"];
+    extra-trusted-public-keys = ["webcord.cachix.org-1:l555jqOZGHd2C9+vS8ccdh8FhqnGe8L78QrHNn+EFEs="];
+  };
 }
