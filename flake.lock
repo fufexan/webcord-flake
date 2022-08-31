@@ -70,16 +70,15 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1661765532,
-        "narHash": "sha256-TW2/CeSuoYaBCTsSixGbF0+NncAtDZbmSXx5RPBSDT8=",
-        "owner": "fufexan",
+        "lastModified": 1661948914,
+        "narHash": "sha256-596RJgybMFUOWKkoMehqT5a7XuR6JkJg5zyqX/t1LuY=",
+        "owner": "nix-community",
         "repo": "dream2nix",
-        "rev": "a0e57d33511c53a9195c4764c5cb7736b4d4893e",
+        "rev": "dc3530785e7388398c40c2b4f5893a674b8bd557",
         "type": "github"
       },
       "original": {
-        "owner": "fufexan",
-        "ref": "electron",
+        "owner": "nix-community",
         "repo": "dream2nix",
         "type": "github"
       }
