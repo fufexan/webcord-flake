@@ -60,6 +60,29 @@ in {
 }
 ```
 
+## Wayland
+
+WebCord runs natively on Wayland, using the standard `--ozone-platform=wayland`
+flag. This package comes with a wrapper that adds that flag automatically when
+the `NIXOS_OZONE_WL=1` environment variable is set, following the example of
+popular packages in Nixpkgs, like VSCode.
+
+### NixOS
+
+```nix
+{
+  environment.variables.NIXOS_OZONE_WL = "1";
+}
+```
+
+### Home Manager
+```nix
+{
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
+}
+```
+
+
 ## Cachix
 
 You can use the Cachix cache to download the binary directly instead of building it
