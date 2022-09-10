@@ -1,0 +1,51 @@
+From 097b5e58ca8772fa2c03e27b7b53a424fa2c90f2 Mon Sep 17 00:00:00 2001
+From: Ian McFarlane <i.mcfarlane2002@gmail.com>
+Date: Sat, 10 Sep 2022 10:19:11 -0400
+Subject: [PATCH] remove dialog box
+
+---
+ sources/code/main/modules/extensions.ts | 16 +++-------------
+ 1 file changed, 3 insertions(+), 13 deletions(-)
+
+diff --git a/sources/code/main/modules/extensions.ts b/sources/code/main/modules/extensions.ts
+index 74864ad..a56520d 100644
+--- a/sources/code/main/modules/extensions.ts
++++ b/sources/code/main/modules/extensions.ts
+@@ -49,7 +49,7 @@ async function parseImports(cssString: string):Promise<string> {
+ 
+ async function addStyle(path:string) {
+   const [
+-    { app, safeStorage, dialog },
++    { app, safeStorage },
+     { readFile, writeFile },
+     { resolve, basename }
+   ] = await Promise.all([
+@@ -65,17 +65,7 @@ async function addStyle(path:string) {
+   const data = readFile(path).then(path => optionalCrypt(path));
+   const out = resolve(app.getPath("userData"),"Themes", basename(path, ".theme.css"));
+   if(resolve(path) === out) return;
+-  const {response} = await dialog.showMessageBox({
+-    title: "WebCord plugin attestation",
+-    message: "WebCord received a request to import theme from path '"+path+"'. Proceed?",
+-    type: "question",
+-    buttons: ["&No","&Yes"],
+-    defaultId: 0,
+-    cancelId: 0,
+-    normalizeAccessKeys: true,
+-  });
+-  if(response === 1)
+-    await writeFile(out, await data);
++  await writeFile(out, await data);
+ }
+ 
+ /**
+@@ -176,4 +166,4 @@ export async function loadChromiumExtensions(session:Electron.Session) {
+ export const styles = Object.freeze({
+   load: loadStyles,
+   add: addStyle
+-});
+\ No newline at end of file
++});
+-- 
+2.36.2
+
