@@ -37,6 +37,7 @@ index 0486f07..1ffcf93 100644
 +}
 diff --git a/sources/code/main/modules/extensions.ts b/sources/code/main/modules/extensions.ts
 index 69dafef..cc55a0b 100644
+
 --- a/sources/code/main/modules/extensions.ts
 +++ b/sources/code/main/modules/extensions.ts
 @@ -49,7 +49,7 @@ async function parseImports(cssString: string):Promise<string> {
