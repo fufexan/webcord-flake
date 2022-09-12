@@ -1,29 +1,33 @@
-From 7e9c1dec16a6650948e3612727a926deb9b7c9a4 Mon Sep 17 00:00:00 2001
+From 6097d78a8b3fff0abd5de376bf75b4548503795e Mon Sep 17 00:00:00 2001
 From: Ian McFarlane <i.mcfarlane2002@gmail.com>
 Date: Sun, 11 Sep 2022 21:41:23 -0400
 Subject: [PATCH] Remove dialog box and start webcord normally when using
  --add-css-theme
 
 ---
- sources/code/common/main.ts             |  6 ++----
+ sources/code/common/main.ts             | 10 ++++------
  sources/code/main/modules/extensions.ts | 16 +++-------------
- 2 files changed, 5 insertions(+), 17 deletions(-)
+ 2 files changed, 7 insertions(+), 19 deletions(-)
 
 diff --git a/sources/code/common/main.ts b/sources/code/common/main.ts
-index 0486f07..4a2d701 100644
+index 0486f07..1ffcf93 100644
 --- a/sources/code/common/main.ts
 +++ b/sources/code/common/main.ts
-@@ -259,9 +259,7 @@ let overwriteMain: (() => unknown) | undefined;
+@@ -258,11 +258,9 @@ let overwriteMain: (() => unknown) | undefined;
+       throw new Error("Flag 'add-css-theme' should include a value of type '{path}'.");
      if(!path.endsWith(".theme.css"))
        throw new Error("Value of flag 'add-css-theme' should point to '*.theme.css' file.");
-     overwriteMain = () => {
+-    overwriteMain = () => {
 -      styles.add(path)
 -        .then(() => process.exit(0))
 -        .catch(() => process.exit(1));
-+      styles.add(path);
-     };
+-    };
++    styles.add(path)
++      .then(() => console.log("Sucessfully added theme " + path))
++      .catch(() => process.exit(1));
    }
  }
+ {
 @@ -446,4 +444,4 @@ if(new Date().getMonth() === 3 && new Date().getDate() === 1){
    }
    // Something's wrong with your date. Websites won't load, so crash the application.
