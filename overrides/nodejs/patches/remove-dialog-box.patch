@@ -1,14 +1,38 @@
-From 097b5e58ca8772fa2c03e27b7b53a424fa2c90f2 Mon Sep 17 00:00:00 2001
+From 7e9c1dec16a6650948e3612727a926deb9b7c9a4 Mon Sep 17 00:00:00 2001
 From: Ian McFarlane <i.mcfarlane2002@gmail.com>
-Date: Sat, 10 Sep 2022 10:19:11 -0400
-Subject: [PATCH] remove dialog box
+Date: Sun, 11 Sep 2022 21:41:23 -0400
+Subject: [PATCH] Remove dialog box and start webcord normally when using
+ --add-css-theme
 
 ---
+ sources/code/common/main.ts             |  6 ++----
  sources/code/main/modules/extensions.ts | 16 +++-------------
- 1 file changed, 3 insertions(+), 13 deletions(-)
+ 2 files changed, 5 insertions(+), 17 deletions(-)
 
+diff --git a/sources/code/common/main.ts b/sources/code/common/main.ts
+index 0486f07..4a2d701 100644
+--- a/sources/code/common/main.ts
++++ b/sources/code/common/main.ts
+@@ -259,9 +259,7 @@ let overwriteMain: (() => unknown) | undefined;
+     if(!path.endsWith(".theme.css"))
+       throw new Error("Value of flag 'add-css-theme' should point to '*.theme.css' file.");
+     overwriteMain = () => {
+-      styles.add(path)
+-        .then(() => process.exit(0))
+-        .catch(() => process.exit(1));
++      styles.add(path);
+     };
+   }
+ }
+@@ -446,4 +444,4 @@ if(new Date().getMonth() === 3 && new Date().getDate() === 1){
+   }
+   // Something's wrong with your date. Websites won't load, so crash the application.
+   throw new NotAnError("Invalid date! I think you should check your calendar...");
+-}
+\ No newline at end of file
++}
 diff --git a/sources/code/main/modules/extensions.ts b/sources/code/main/modules/extensions.ts
-index 74864ad..a56520d 100644
+index 69dafef..cc55a0b 100644
 --- a/sources/code/main/modules/extensions.ts
 +++ b/sources/code/main/modules/extensions.ts
 @@ -49,7 +49,7 @@ async function parseImports(cssString: string):Promise<string> {
