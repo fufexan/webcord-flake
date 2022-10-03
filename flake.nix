@@ -39,9 +39,29 @@
         };
       });
     dream = genSystems (system: dreamlib.${system}.makeOutputs {source = webcord;});
+
+    wrapper = system: old: config: let
+      pkgs = nixpkgs.legacyPackages.${system};
+      webcord-wrapped =
+        pkgs.runCommand "${old.name}-wrapped"
+        {
+          inherit (old) pname version meta;
+
+          nativeBuildInputs = [pkgs.makeWrapper];
+          makeWrapperArgs = config.makeWrapperArgs or [];
+        }
+        ''
+          mkdir -p $out
+          cp -r --no-preserve=mode,ownership ${old}/* $out/
+          chmod +x $out/bin/*
+          wrapProgram "$out/bin/webcord" ''${makeWrapperArgs[@]} \
+            --add-flags ${config.flags or ""}
+        '';
+    in
+      webcord-wrapped // {override = wrapper system old;};
   in {
     packages = genSystems (system: rec {
-      inherit (dream.${system}.packages) webcord;
+      webcord = wrapper system dream.${system}.packages.webcord {};
       default = webcord;
     });
 
