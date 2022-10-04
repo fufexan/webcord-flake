@@ -1,19 +1,13 @@
-From 6097d78a8b3fff0abd5de376bf75b4548503795e Mon Sep 17 00:00:00 2001
-From: Ian McFarlane <i.mcfarlane2002@gmail.com>
-Date: Sun, 11 Sep 2022 21:41:23 -0400
-Subject: [PATCH] Remove dialog box and start webcord normally when using
- --add-css-theme
-
 ---
  sources/code/common/main.ts             | 10 ++++------
  sources/code/main/modules/extensions.ts | 16 +++-------------
  2 files changed, 7 insertions(+), 19 deletions(-)
 
 diff --git a/sources/code/common/main.ts b/sources/code/common/main.ts
-index 0486f07..1ffcf93 100644
+index b6ff5b4..4296238 100644
 --- a/sources/code/common/main.ts
 +++ b/sources/code/common/main.ts
-@@ -258,11 +258,9 @@ let overwriteMain: (() => unknown) | undefined;
+@@ -255,11 +255,9 @@ let overwriteMain: (() => unknown) | undefined;
        throw new Error("Flag 'add-css-theme' should include a value of type '{path}'.");
      if(!path.endsWith(".theme.css"))
        throw new Error("Value of flag 'add-css-theme' should point to '*.theme.css' file.");
@@ -28,7 +22,7 @@ index 0486f07..1ffcf93 100644
    }
  }
  {
-@@ -446,4 +444,4 @@ if(new Date().getMonth() === 3 && new Date().getDate() === 1){
+@@ -443,4 +441,4 @@ if(new Date().getMonth() === 3 && new Date().getDate() === 1){
    }
    // Something's wrong with your date. Websites won't load, so crash the application.
    throw new NotAnError("Invalid date! I think you should check your calendar...");
@@ -36,20 +30,19 @@ index 0486f07..1ffcf93 100644
 \ No newline at end of file
 +}
 diff --git a/sources/code/main/modules/extensions.ts b/sources/code/main/modules/extensions.ts
-index 69dafef..cc55a0b 100644
-
+index 31dda83..bab90c3 100644
 --- a/sources/code/main/modules/extensions.ts
 +++ b/sources/code/main/modules/extensions.ts
-@@ -49,7 +49,7 @@ async function parseImports(cssString: string):Promise<string> {
- 
+@@ -54,7 +54,7 @@ async function parseImports(cssString: string):Promise<string> {
  async function addStyle(path:string) {
    const [
--    { app, safeStorage, dialog },
-+    { app, safeStorage },
+ 
+-    { app, dialog },
++    { app },
      { readFile, writeFile },
-     { resolve, basename }
-   ] = await Promise.all([
-@@ -65,17 +65,7 @@ async function addStyle(path:string) {
+     { resolve, basename },
+     safeStorage
+@@ -72,17 +72,7 @@ async function addStyle(path:string) {
    const data = readFile(path).then(path => optionalCrypt(path));
    const out = resolve(app.getPath("userData"),"Themes", basename(path, ".theme.css"));
    if(resolve(path) === out) return;
@@ -68,7 +61,7 @@ index 69dafef..cc55a0b 100644
  }
  
  /**
-@@ -176,4 +166,4 @@ export async function loadChromiumExtensions(session:Electron.Session) {
+@@ -185,4 +175,4 @@ export async function loadChromiumExtensions(session:Electron.Session) {
  export const styles = Object.freeze({
    load: loadStyles,
    add: addStyle

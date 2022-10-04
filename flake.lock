@@ -70,11 +70,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1663678795,
-        "narHash": "sha256-SkROcpe7lb46fpBnwMYooExP6WqttsRPeao1d9ykHho=",
+        "lastModified": 1664882193,
+        "narHash": "sha256-uiAYOxN/M4dpaB6ieY3xOvOH6XgHP9NVXDTzSRa3pMc=",
         "owner": "nix-community",
         "repo": "dream2nix",
-        "rev": "0f3b6c5dd1630d601ae6f456421b4dfed178f260",
+        "rev": "785b76894263fd76a0e69955e4cd990b7b735bdf",
         "type": "github"
       },
       "original": {
@@ -170,11 +170,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1663684946,
-        "narHash": "sha256-2+miCrlBWC3ELfz862mJ4U8qQyfiD+XLzD9p6k/WzCs=",
+        "lastModified": 1664876616,
+        "narHash": "sha256-OxZntLnFgKbGUrPJJNLMxxj4yUaN/30+LG9N81ADqZE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0d7222c92f0503d15176281c7182d2782dc1b6da",
+        "rev": "0490b307e5556a8804e710d0c744d29c80fbce48",
         "type": "github"
       },
       "original": {
@@ -252,11 +252,11 @@
     "webcord": {
       "flake": false,
       "locked": {
-        "lastModified": 1663533822,
-        "narHash": "sha256-TvlaaWu40La+CRD2+zXXRmyAF6LEU63eH/BuEQgUiQ4=",
+        "lastModified": 1664742535,
+        "narHash": "sha256-QoXBlhCM97haNlkbU4O2oXITnzrkiM9hYAiNpduVjIQ=",
         "owner": "SpacingBat3",
         "repo": "WebCord",
-        "rev": "2df618b4669eaca06b2f635145d1293a612fa24c",
+        "rev": "cb6938bde4f57b252b167b23fc0c2d6120326fff",
         "type": "github"
       },
       "original": {
