@@ -20,6 +20,8 @@
     webcord,
     ...
   }: let
+    inherit (nixpkgs) lib;
+
     supportedSystems = [
       "aarch64-linux"
       "x86_64-linux"
@@ -28,7 +30,7 @@
       #"aarch64-darwin"
       #"x86_64-darwin"
     ];
-    genSystems = nixpkgs.lib.genAttrs supportedSystems;
+    genSystems = lib.genAttrs supportedSystems;
 
     dreamlib = genSystems (system:
       dream2nix.lib.init {
@@ -55,11 +57,8 @@
           cp -r --no-preserve=mode,ownership ${old}/* $out/
           chmod +x $out/bin/*
           wrapProgram "$out/bin/webcord" ''${makeWrapperArgs[@]} ${
-            if (config.flags or []) != []
-            then ''
-              ${pkgs.lib.concatStringsSep " " (map (flag: "--add-flags ${flag}") config.flags)}
-            ''
-            else ""
+            lib.optionalString ((config.flags or []) != [])
+            (lib.concatStringsSep " " (map (flag: "--add-flags ${flag}") config.flags))
           }
         '';
     in
