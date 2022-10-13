@@ -65,14 +65,14 @@
     in
       webcord-wrapped // {override = wrapper system old;};
   in {
-    packages = genSystems (system: rec {
+    packages = genSystems (system: {
       webcord = wrapper system dream.${system}.packages.webcord {};
-      default = webcord;
+      default = self.packages.${system}.webcord;
     });
 
-    homeManagerModules = rec {
+    homeManagerModules = {
       webcord = import ./hm-module.nix self;
-      default = webcord;
+      default = self.homeManagerModules.webcord;
     };
 
     formatter = genSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
