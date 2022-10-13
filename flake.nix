@@ -74,6 +74,13 @@
       default = self.homeManagerModules.webcord;
     };
 
+    overlays = {
+      webcord = _: prev: {
+        webcord = self.packages.${prev.system}.webcord;
+      };
+      default = self.overlays.webcord;
+    };
+
     formatter = genSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   };
 }
