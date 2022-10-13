@@ -57,6 +57,21 @@ in {
           }
         '';
       };
+
+      deleteThemes = lib.mkEnableOption ''
+        Whether to enable the DAG entry to delete files in the `Themes`
+        directory before creating new links.
+
+        Note that this is not necessary to mitigate the issue with WebCord
+        not cleaning up, because all symlinks created by Nix will be re-created
+        upon a generation switch.
+
+        Only enable this if for some reason you don't want to be able to add
+        files to the `Themes` directory manually.
+
+        **The `Themes` directory contents will be permanently deleted**
+        when activating a new generation!
+      '';
     };
   };
 
@@ -74,6 +89,16 @@ in {
           value = {inherit source;};
         })
         cfg.themes;
+    })
+
+    # add a DAG entry to remove the themes that are not managed
+    (lib.mkIf (cfg.deleteThemes) {
+      home.activation = {
+        rmWebCordThemes = lib.hm.dag.entryBefore ["linkGeneration"] ''
+          $DRY_RUN_CMD rm -rf $VERBOSE_ARG \
+            ${config.xdg.configHome}/WebCord/Themes/*
+        '';
+      };
     })
   ]);
 }
