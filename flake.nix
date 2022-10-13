@@ -54,8 +54,13 @@
           mkdir -p $out
           cp -r --no-preserve=mode,ownership ${old}/* $out/
           chmod +x $out/bin/*
-          wrapProgram "$out/bin/webcord" ''${makeWrapperArgs[@]} \
-            --add-flags ${config.flags or ""}
+          wrapProgram "$out/bin/webcord" ''${makeWrapperArgs[@]} ${
+            if (config.flags or []) != []
+            then ''
+              ${pkgs.lib.concatStringsSep " " (map (flag: "--add-flags ${flag}") config.flags)}
+            ''
+            else ""
+          }
         '';
     in
       webcord-wrapped // {override = wrapper system old;};
