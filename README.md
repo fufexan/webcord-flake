@@ -141,6 +141,14 @@ This is recommended over using the `--add-css-theme` flag for several reasons:
 - When using the flag, only the first path specified will be copied.
   - This means you have to manually merge themes, and pass them as a single file.
 
+There is one major disadvantage however: loading themes from `Themes` is stated to be deprecated *soon&trade;*.
+
+> Currently WebCord loads CSS themes from `{userData}/Themes/` directory when they ends with `.theme.css` extension, like most BetterDiscord themes does.
+>
+> However, in the future releases WebCord will encrypt themes with `safeStorage` in approach to prevent tinkering with it by third-party software after it is added to WebCord in order to improve the security especially in the future releases where it is planned that WebCord allow themes to modify its CSP in some way. This breaks with loading themes through `.theme.css` files and adds `--add-css-theme` flag as an alternative.
+>
+> <sub>[Source](https://github.com/SpacingBat3/WebCord/blob/master/docs/Features.md#1-custom-discord-styles)</sub>
+
 #### In your `home.nix` (only):
 
 ```nix
@@ -166,6 +174,8 @@ programs.webcord = {
 ### Package Override
 
 You can set themes (non-reproducibly) by overriding the package.
+
+Read about the option flag [here](https://github.com/SpacingBat3/WebCord/blob/master/docs/Features.md#1-custom-discord-styles).
 
 #### In your `configuration.nix` or `home.nix`:
 
