@@ -71,7 +71,7 @@
     });
 
     homeManagerModules = rec {
-      webcord = import ./hm-module.nix;
+      webcord = import ./hm-module.nix self;
       default = webcord;
     };
 

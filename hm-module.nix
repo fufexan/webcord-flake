@@ -1,4 +1,4 @@
-{
+self: {
   config,
   pkgs,
   lib,
@@ -13,7 +13,7 @@ in {
 
       package = lib.mkOption {
         type = types.package;
-        default = pkgs.webcord;
+        default = self.packages.${pkgs.system}.default;
         description = lib.mdDoc ''
           Package to use for WebCord configuration.
         '';
