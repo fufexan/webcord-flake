@@ -18,11 +18,11 @@ in {
           Package to use for WebCord configuration.
         '';
         example = lib.literalExpression ''
-          pkgs.webcord.overrideAttrs (old: {
+          inputs.webcord.packages.''${pkgs.system}.webcord.override {
             flags = [
               "--start-minimized"
             ];
-          })
+          }
         '';
       };
 
