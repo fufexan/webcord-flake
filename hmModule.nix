@@ -34,7 +34,9 @@ in {
           theme when linked into `$XDG_CONFIG_HOME/WebCord/Themes`,
           and the value is the file path of the CSS source.
 
-          *This will need to change once
+          *This will need to change once the
+          [feature](https://github.com/SpacingBat3/WebCord/blob/master/docs/Features.md#1-custom-discord-styles)
+          is stabilized.*
         '';
         example = lib.literalExpression ''
           let
