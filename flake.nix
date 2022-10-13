@@ -70,6 +70,11 @@
       default = webcord;
     });
 
+    homeManagerModules = rec {
+      webcord = import ./hmModule.nix;
+      default = webcord;
+    };
+
     formatter = genSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   };
 }
