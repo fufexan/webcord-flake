@@ -38,7 +38,7 @@ A Discord and Fosscord client implemented directly without Discord API.
 ```nix
 {pkgs, inputs, ...}: {
   environment.systemPackages = [ # or home.packages
-    inputs.packages.${pkgs.system}.default
+    inputs.webcord.packages.${pkgs.system}.default
     # ...
   ];
 }
