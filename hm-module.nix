@@ -27,7 +27,7 @@ in {
       };
 
       themes = lib.mkOption {
-        type = types.attrsOf types.string;
+        type = types.attrsOf types.path;
         default = {};
         description = lib.mdDoc ''
           An attribute set of themes, where each key is the name of the
