@@ -46,7 +46,23 @@ A Discord and Fosscord client implemented directly without Discord API.
 
 ### Merging with `pkgs`
 
-Optionally, if you import `nixpkgs` manually (and don't use `legacyPackages`), you can use `pkgs.webcord` as if it were any other package.
+Overlays allow another set of packages or package scopes to be merged onto *nixpkgs*.
+This means that when using an overlay provided by a Flake, its packages will be made
+available at `pkgs.<name>`.
+
+In order for an overlay to be applied to *nixpkgs* early, you must import
+*nixpkgs* manually in your `flake.nix`, instead of using `nixpkgs.legacyPackages`.
+
+Usually where you have `pkgs = nixpkgs.legacyPackages.${system};`,
+you would instead use:
+
+```nix
+pkgs = import nixpkgs {
+  inherit system;
+  # config.allowUnfree = true;
+};
+```
+A complete example for including the overlay in this manner follows.
 
 #### In your `flake.nix`:
 
