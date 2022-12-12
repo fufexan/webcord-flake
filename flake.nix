@@ -2,7 +2,7 @@
   description = "WebCord Nix Flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     dream2nix = {
       url = "github:nix-community/dream2nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,7 +40,8 @@
           overridesDirs = ["${dream2nix}/overrides" ./overrides];
         };
       });
-    dream = genSystems (system: dreamlib.${system}.makeOutputs {source = webcord;});
+
+    dream = genSystems (system: dreamlib.${system}.dream2nix-interface.makeOutputs {source = webcord;});
 
     wrapper = system: old: config: let
       pkgs = nixpkgs.legacyPackages.${system};

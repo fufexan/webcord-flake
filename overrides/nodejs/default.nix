@@ -78,15 +78,12 @@
         libXtst
       ]);
 
-    patches = [./patches/remove-dialog-box.patch];
+    # patches = [./patches/remove-dialog-box.patch];
 
     preConfigure = ''
       cp ${buildInfo} buildInfo.json
     '';
     postBuild = ''
-      mkdir code
-      mv app/* code
-      mv code app
       cp -r sources/translations app
       rm -rf .husky
     '';
