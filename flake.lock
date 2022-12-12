@@ -342,11 +342,11 @@
     "webcord": {
       "flake": false,
       "locked": {
-        "lastModified": 1670537029,
-        "narHash": "sha256-3mNPsMfj1MFNgb7PP8SCuFvSshRxZECMDCUjduRHdXY=",
+        "lastModified": 1670713990,
+        "narHash": "sha256-e+y/M+/gjezHoNrdXeFhqtvxbPdhRSDOQlwK1nUhNfo=",
         "owner": "SpacingBat3",
         "repo": "WebCord",
-        "rev": "12fc5e38d0b03f7b63378ee9111abc40c7aee55d",
+        "rev": "80ba858c025e0bb59510f7136211948d8ae10ece",
         "type": "github"
       },
       "original": {
