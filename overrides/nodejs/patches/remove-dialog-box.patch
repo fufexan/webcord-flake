@@ -4,10 +4,10 @@
  2 files changed, 7 insertions(+), 19 deletions(-)
 
 diff --git a/sources/code/common/main.ts b/sources/code/common/main.ts
-index b6ff5b4..4296238 100644
+index 6eeebbe..d20ba36 100644
 --- a/sources/code/common/main.ts
 +++ b/sources/code/common/main.ts
-@@ -255,11 +255,9 @@ let overwriteMain: (() => unknown) | undefined;
+@@ -296,11 +296,9 @@ let overwriteMain: (() => unknown) | undefined;
        throw new Error("Flag 'add-css-theme' should include a value of type '{path}'.");
      if(!path.endsWith(".theme.css"))
        throw new Error("Value of flag 'add-css-theme' should point to '*.theme.css' file.");
@@ -17,23 +17,23 @@ index b6ff5b4..4296238 100644
 -        .catch(() => process.exit(1));
 -    };
 +    styles.add(path)
-+      .then(() => console.log("Sucessfully added theme " + path))
++      .then(() => console.log("Successfully added theme " + path))
 +      .catch(() => process.exit(1));
    }
  }
  {
-@@ -443,4 +441,4 @@ if(new Date().getMonth() === 3 && new Date().getDate() === 1){
+@@ -525,4 +523,4 @@ app.on("child-process-gone", (_event, details) => {
+     console.error(kolor.bold("[%s:%d]")+" %s", name, details.exitCode, reason);
+     if(tip !== null) setImmediate(() => console.error(kolor.bold("[%s:TIP]")+" %s", name, tip));
    }
-   // Something's wrong with your date. Websites won't load, so crash the application.
-   throw new NotAnError("Invalid date! I think you should check your calendar...");
--}
+-});
 \ No newline at end of file
-+}
++});
 diff --git a/sources/code/main/modules/extensions.ts b/sources/code/main/modules/extensions.ts
-index 31dda83..bab90c3 100644
+index 4dd0b9d..fd86fb7 100644
 --- a/sources/code/main/modules/extensions.ts
 +++ b/sources/code/main/modules/extensions.ts
-@@ -54,7 +54,7 @@ async function parseImports(cssString: string):Promise<string> {
+@@ -66,7 +66,7 @@ async function parseImports(cssString: string, maxTries=5):Promise<string> {
  async function addStyle(path:string) {
    const [
  
@@ -42,7 +42,7 @@ index 31dda83..bab90c3 100644
      { readFile, writeFile },
      { resolve, basename },
      safeStorage
-@@ -72,17 +72,7 @@ async function addStyle(path:string) {
+@@ -84,17 +84,7 @@ async function addStyle(path:string) {
    const data = readFile(path).then(path => optionalCrypt(path));
    const out = resolve(app.getPath("userData"),"Themes", basename(path, ".theme.css"));
    if(resolve(path) === out) return;
@@ -61,7 +61,7 @@ index 31dda83..bab90c3 100644
  }
  
  /**
-@@ -185,4 +175,4 @@ export async function loadChromiumExtensions(session:Electron.Session) {
+@@ -197,4 +187,4 @@ export async function loadChromiumExtensions(session:Electron.Session) {
  export const styles = Object.freeze({
    load: loadStyles,
    add: addStyle
@@ -69,5 +69,5 @@ index 31dda83..bab90c3 100644
 \ No newline at end of file
 +});
 -- 
-2.36.2
+2.38.1
 
