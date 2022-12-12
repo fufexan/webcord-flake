@@ -78,7 +78,7 @@
         libXtst
       ]);
 
-    # patches = [./patches/remove-dialog-box.patch];
+    patches = [./patches/remove-dialog-box.patch];
 
     preConfigure = ''
       cp ${buildInfo} buildInfo.json
