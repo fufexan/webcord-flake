@@ -30,6 +30,7 @@
       makeWrapper
       nodejs
       python3
+      nodePackages_latest.typescript
     ];
 
     buildInputs = with pkgs;
