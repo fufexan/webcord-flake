@@ -91,11 +91,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1672407173,
-        "narHash": "sha256-lmUyHBOtD2XuXqthfXOo5ofv4+tRJV9LF0W8Urn3e6o=",
+        "lastModified": 1672661134,
+        "narHash": "sha256-WqBUyKeiv+jI11ug+qP0OnZ4nngK6eBRVTGHgdzEGvc=",
         "owner": "nix-community",
         "repo": "dream2nix",
-        "rev": "7ca3383c2ca2b49b5a0990fc898e4f2fa7848e62",
+        "rev": "9f6911c78dcb0832f7fcc955e847db1a5a9ce29a",
         "type": "github"
       },
       "original": {
@@ -342,11 +342,11 @@
     "webcord": {
       "flake": false,
       "locked": {
-        "lastModified": 1672516701,
-        "narHash": "sha256-3o1gPdIvb6SDeajX4B0eBd3N647OrUf0NnUa355ljfc=",
+        "lastModified": 1672594683,
+        "narHash": "sha256-Buu7eKmI0UGV/9Kfj+urmDcjBtR9HSwW+mlHaYhfUa4=",
         "owner": "SpacingBat3",
         "repo": "WebCord",
-        "rev": "6777a6cabeab5169b6e662ee0942df38ba5096a0",
+        "rev": "7f0db551759ed3dfe1d2ccee39e339e2ff949bdb",
         "type": "github"
       },
       "original": {
