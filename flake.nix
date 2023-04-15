@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    dream2nix = {
-      url = "github:nix-community/dream2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     webcord = {
       url = "github:SpacingBat3/WebCord";
       flake = false;
@@ -16,7 +12,6 @@
   outputs = {
     self,
     nixpkgs,
-    dream2nix,
     webcord,
     ...
   }: let
@@ -31,17 +26,6 @@
       #"x86_64-darwin"
     ];
     genSystems = lib.genAttrs supportedSystems;
-
-    dreamlib = genSystems (system:
-      dream2nix.lib.init {
-        pkgs = nixpkgs.legacyPackages.${system};
-        config = {
-          projectRoot = ./.;
-          overridesDirs = ["${dream2nix}/overrides" ./overrides];
-        };
-      });
-
-    dream = genSystems (system: dreamlib.${system}.dream2nix-interface.makeOutputs {source = webcord;});
 
     wrapper = system: old: config: let
       pkgs = nixpkgs.legacyPackages.${system};
@@ -65,8 +49,31 @@
     in
       webcord-wrapped // {override = wrapper system old;};
   in {
-    packages = genSystems (system: {
-      webcord = wrapper system dream.${system}.packages.webcord {};
+    packages = genSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+      webcord = pkgs.buildNpmPackage rec {
+        pname = "webcord";
+        version = "v4.2.0";
+        src = pkgs.fetchFromGitHub {
+          owner = "SpacingBat3";
+          repo = "WebCord";
+          rev = version;
+          sha256 = "sha256-530iWNvehImwSYt5HnZaqa4TAslrwxAOZi3gRm1K2/w=";
+        };
+
+        npmDepsHash = "sha256-YguZtGn8CT4EqOQWS0GeNGBdZSC3Lj1gFR0ZiegWTJU=";
+        nativeBuildInputs = with pkgs; [python3];
+
+        patches = [./overrides/nodejs/patches/remove-dialog-box.patch];
+
+        meta = with pkgs.lib; {
+          description = "A Discord and Fosscord client made with the Electron API";
+          homepage = "https://github.com/SpacingBat3/WebCord";
+          license = licenses.mit;
+        };
+      };
+    in {
+      inherit webcord;
       default = self.packages.${system}.webcord;
     });
 
@@ -77,7 +84,7 @@
 
     overlays = {
       webcord = _: prev: {
-        webcord = self.packages.${prev.system}.webcord;
+        inherit (self.packages.${prev.system}) webcord;
       };
       default = self.overlays.webcord;
     };
