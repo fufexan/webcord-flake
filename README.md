@@ -1,5 +1,8 @@
 # WebCord Flake
 
+> [!IMPORTANT]
+> This repo has been superseded by the inclusion of WebCord in Nixpkgs. Please use it from there directly.
+
 A Discord and Fosscord client implemented directly without Discord API.
 
 ## Use with Flakes
